@@ -687,6 +687,10 @@ footer p {
 	margin-bottom: 0;
 }
 
+img.auditions {
+	max-height: 200px;
+}
+
 /*--------------------------------------------------------------
 10.1 Posts and pages
 --------------------------------------------------------------*/
@@ -746,12 +750,6 @@ footer p {
 	width: 44%;
 }
 
-.homepage-article h1, .homepage-article h2 {
-	float: right;
-	width: 53%;
-	clear: none;
-}
-
 .homepage-article h1 {
 	line-height: 1;
 	margin-bottom: 0.25em;
@@ -776,6 +774,14 @@ footer p {
 	padding: 1em 0 0.5em 0;
 }
 
+.homepage-article h2 {
+	float: right;
+	width: 53%;
+	clear: none;
+	padding-top: 0;
+	vertical-align: top;
+}
+
 .main-content h3 {
 	font-size: 1.1em;
 	color: #2587B3;
@@ -795,7 +801,7 @@ footer p {
 }
 
 .main-content .show-info img {
-	height: 200px;
+	max-height: 200px;
 }
 
 .main-content .char-desc {

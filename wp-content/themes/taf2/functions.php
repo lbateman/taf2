@@ -148,8 +148,7 @@ add_action( 'after_switch_theme', 'my_flush_rewrite_rules' );
 
 
 function create_my_post_types() {
- register_post_type( 'show_post', 
- array(
+ register_post_type( 'show_post', array(
       'labels' => array(
       	'name' => __( 'Shows' ),
       	'singular_name' => __( 'Show' ),
@@ -161,8 +160,8 @@ function create_my_post_types() {
       	'view' => __( 'View Show' ),
       	'view_item' => __( 'View Show' ),
       	'search_items' => __( 'Search Shows' ),
-      	'not_found' => __( 'No Shows found' ),
-      	'not_found_in_trash' => __( 'No Shows found in Trash' ),
+      	'not_found' => __( 'No Shows Found' ),
+      	'not_found_in_trash' => __( 'No Shows Found in Trash' ),
       	'parent' => __( 'Parent Show' ),
       ),
  'public' => true,
@@ -177,8 +176,7 @@ function create_my_post_types() {
       'hierarchical' => false,
      )
   );
-  register_post_type( 'audition_post', 
- array(
+  register_post_type( 'audition_post', array(
       'labels' => array(
       	'name' => __( 'Auditions' ),
       	'singular_name' => __( 'Audition' ),
@@ -194,7 +192,7 @@ function create_my_post_types() {
       	'not_found_in_trash' => __( 'No Auditions Found in Trash' ),
       	'parent' => __( 'Parent Audition' ),
       ),
- 'public' => true,
+      'public' => true,
       'menu_position' => 5,
       'rewrite' => array('slug' => 'auditions'),
       'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
@@ -206,5 +204,35 @@ function create_my_post_types() {
       'hierarchical' => false,
      )
   );
+
+ register_post_type( 'press_post', array(
+      'labels' => array(
+        'name' => __( 'Press' ),
+        'singular_name' => __( 'Article' ),
+        'add_new' => __( 'Add New' ),
+        'add_new_item' => __( 'Add New Article' ),
+        'edit' => __( 'Edit' ),
+        'edit_item' => __( 'Edit Article' ),
+        'new_item' => __( 'New Article' ),
+        'view' => __( 'View Article' ),
+        'view_item' => __( 'View Article' ),
+        'search_items' => __( 'Search Articles' ),
+        'not_found' => __( 'No Articles Found' ),
+        'not_found_in_trash' => __( 'No Articles Found in Trash' ),
+        'parent' => __( 'Parent Article' ),
+      ),
+      'public' => true,
+      'menu_position' => 6,
+      'rewrite' => array('slug' => 'press'),
+      'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail' ),
+      'taxonomies' => array('category', 'post_tag'),
+      'publicly_queryable' => true,
+      'show_ui' => true,
+      'query_var' => true,
+      'capability_type' => 'post',
+      'hierarchical' => false,
+    )
+  );
 }
+
 

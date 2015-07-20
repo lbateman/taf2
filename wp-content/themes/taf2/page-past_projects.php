@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Directions
+Template Name: Past_Projects
 */
 
 get_header(); ?>
@@ -10,7 +10,7 @@ get_header(); ?>
 
 			<!-- show information (left column) -->
 			<section class="main-content">
-				<h1>Directions to Theatre@First Locations</h1>
+				<h1>Past Projects</h1>
 					<?php
 						// check if the repeater field has rows of data
 						if( have_rows('venue') ):

@@ -13,7 +13,7 @@ get_header(); ?>
 			<!-- show information (left column) -->
 			<section class="main-content">
 				<section class="show-info">
-					<?php the_post_thumbnail(); ?>
+					<a href="<?php the_permalink() ?>"><img class="shows" src="<?php the_field('show_logo'); ?>" alt="<?php the_title(); ?>"></a>
 					<h1><?php the_title(); ?></h1>
 					<h2><?php the_field('authors'); ?></h2>
 					<h3><?php the_field('directors'); ?></h3>
@@ -24,15 +24,18 @@ get_header(); ?>
 				<section class="performance-info">
 					<h2>Performance Schedule</h2>
 					<table>
-						<?php while (have_rows('performance_schedule')): the_row(); ?>
-							<tr>
-								<section class="schedule">
-									<td><?php the_sub_field('day_of_week'); ?></td>
-									<td><?php the_sub_field('date'); ?></td>
-									<td><?php the_sub_field('time'); ?></td>
-								</section> <!-- End of schedule -->
-							</tr>
-						<?php endwhile; ?>
+						<?php if( have_rows('performance_schedule') ) :
+							while( have_rows('performance_schedule') ) :
+								the_row(); ?>
+								<tr>
+									<section class="schedule">
+										<td><?php the_sub_field('perf_day'); ?></td>
+										<td><?php the_sub_field('perf_date'); ?></td>
+										<td><?php the_sub_field('perf_time'); ?></td>
+									</section> <!-- End of schedule -->
+								</tr>
+							<?php endwhile; 
+						endif; ?>
 					</table>
 				</section><!-- End of performance-info -->
 				
@@ -51,12 +54,15 @@ get_header(); ?>
 				
 				<section class="ticket-info">
 					<h2>Ticket Information</h2>
-					<?php while (have_rows('ticket_information')): the_row(); ?>
-						<section class="ticket-service">
-							<img class="ticket-logo" src="<?php the_sub_field('ticket_service_logo'); ?>" alt="Ticket service logo">
-							<?php the_sub_field('ticket_service_description'); ?>
-						</section> <!-- End of ticket-service -->
-					<?php endwhile; ?>
+					<?php if( have_rows( 'ticket_information' ) ) :
+						while( have_rows( 'ticket_information' ) ) : 
+							the_row(); ?>
+							<section class="ticket-service">
+								<img class="ticket-logo" src="<?php the_sub_field('ticket_service_logo'); ?>" alt="Ticket service logo">
+								<?php the_sub_field('ticket_service_description'); ?>
+							</section> <!-- End of ticket-service -->
+						<?php endwhile; 
+					endif; ?>
 				</section><!-- End of ticket-info -->
 				
 				<section class="director-info">
@@ -85,7 +91,7 @@ get_header(); ?>
 							<tr>
 								<section class="crew">
 									<td><?php the_sub_field('production_role'); ?></td>
-									<td><?php the_sub_field('name'); ?></td>
+									<td><?php the_sub_field('crewmember_name'); ?></td>
 								</section> <!-- End of crew -->
 							</tr>
 						<?php endwhile; ?>

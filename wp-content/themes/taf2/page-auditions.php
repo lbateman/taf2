@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: Contact
+Template Name: AuditionList
 */
 
 get_header(); ?>
@@ -10,33 +10,30 @@ get_header(); ?>
 
 			<!-- show information (left column) -->
 			<section class="main-content">
-				<h1>Contact Theatre@First</h1>
+				<h1>Current Auditions</h1>
+				<?php
+					// Set up a custom query that pulls audition posts in the current-auditions category
+					$the_query = new WP_Query( array(
+						'post_type' => 'audition_post',
+						'category_name' => 'current-auditions', 
+						'posts_per_page' => 10
+					) );
 
-				<h2>Email</h2>
-					<table>
-						<?php
-							// check if the repeater field has rows of data
-							if( have_rows('email') ):
-						 		// loop through the rows of data
-		    					while ( have_rows('email') ) : the_row(); ?>
-		    						<tr>
-			    						<?php //get the email address for the mailto link
-			    						$addr = get_sub_field('email_address');
-								        // display a sub field value ?>
-								        <td><?php the_sub_field('email_purpose'); ?>:</td>
-							        	<td><a href="mailto:<?php $addr ?>"><?php the_sub_field('email_address'); ?></a></td>
-							        </tr>
-			    					<?php endwhile;
-								else :
-								    // no rows found
-									endif;
-						?>
-					</table>
+					// Use the custom query in the Loop
+					if ( $the_query->have_posts() ) :
+						while ( $the_query->have_posts() ) : 
+							$the_query->the_post() ; ?>
+							<a href="<?php the_permalink() ?>"><img class="auditions" src="<?php the_field('audition_logo'); ?>" alt="<?php the_title(); ?>"></a>
+							<h2><?php the_title(); ?></h2>
+							<p><a href="<?php the_permalink() ?>" class="text-link"><strong>Auditions:</strong></a> <?php the_field('audition_dates'); ?></p>
+						<? endwhile;
+					else :
+						    echo "<p>There are currently no open auditions for Theatre@First productions. For announcements about auditions for upcoming shows, join our <a href=\"http://www.theatreatfirst.org/mailinglist.shtml\">mailing list</a> or email <a href=\"mailto:auditions@theatreatfirst.org\">auditions@theatreatfirst.org</a>.</p>" ;
+					endif;
 
-				<h2>Phone</h2>
-				    <?php the_field('phone'); ?>
-				<h2>Postal Mail</h2>
-				    <?php the_field('postal_mail'); ?>
+					//Reset the query to the default
+					wp_reset_postdata() ;
+				?>
 
 			</section> <!-- main-content -->
 
